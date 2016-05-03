@@ -1,0 +1,16 @@
+{
+  "name": "loc8r",
+  "version": "0.0.0",
+  "description": "loc8r",
+  "main": "app.js",
+  "author": {
+    "name": "joshuaada",
+    "email": ""
+  },
+  "dependencies": {
+    "bootstrap": "3.3.6",
+    "express": "3.4.4",
+    "jade": "*",
+    "stylus": "*"
+  }
+}
