@@ -35,6 +35,8 @@
     <Compile Include="app_server\routes\index.js" />
     <Compile Include="app_server\routes\user.js" />
     <Content Include="package.json" />
+    <Content Include="public\Bootstrap\css\amelia.bootstrap.css" />
+    <Content Include="public\Bootstrap\css\amelia.bootstrap.min.css" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
     <Content Include="app_server\views\index.jade" />
@@ -44,8 +46,12 @@
     <Folder Include="app_server\" />
     <Folder Include="app_server\controllers\" />
     <Folder Include="public\" />
+    <Folder Include="public\Bootstrap\css\" />
+    <Folder Include="public\Bootstrap\fonts\" />
+    <Folder Include="public\Bootstrap\js\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />
+    <Folder Include="public\Bootstrap\" />
     <Folder Include="public\stylesheets\" />
     <Folder Include="app_server\routes\" />
     <Folder Include="app_server\views\" />

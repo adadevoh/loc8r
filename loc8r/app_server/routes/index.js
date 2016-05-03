@@ -3,13 +3,8 @@
  * GET home page.
  */
 
-/*
- * app.get('/', routes.index);
-app.get('/', routes.homePageController);
-//app.get('/home', routes.index.ctrlMain.index);
-app.get('/users', user.list);
- */
 
+//define controller modules
 var ctrlMain = require('../controllers/main');
 
 module.exports = function (app) {
@@ -23,9 +18,5 @@ module.exports = function (app) {
 };
 
 var index = function (req, res) {
-    res.render('index', { title: 'Express routt' });
+    res.render('index', { title: 'Express routte example' });
 };
-
-/*exports.homePageController = function (req, res) {
-    res.render('index', {title: 'Hello World'});
-}*/
