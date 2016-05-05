@@ -31,9 +31,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="app_server\controllers\locations.js" />
     <Compile Include="app_server\controllers\main.js" />
+    <Compile Include="app_server\controllers\others.js" />
     <Compile Include="app_server\routes\index.js" />
     <Compile Include="app_server\routes\user.js" />
+    <Content Include="app_server\views\error.jade" />
+    <Content Include="app_server\views\generic-text.jade" />
+    <Content Include="app_server\views\location-info.jade" />
+    <Content Include="app_server\views\location-review-form.jade" />
+    <Content Include="app_server\views\locations-list.jade" />
     <Content Include="package.json" />
     <Content Include="public\Bootstrap\css\amelia.bootstrap.css" />
     <Content Include="public\Bootstrap\css\amelia.bootstrap.min.css" />
