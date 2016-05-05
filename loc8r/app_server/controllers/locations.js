@@ -5,16 +5,46 @@
 
 //get locations home page
 exports.homelist = function (req, res) {
-    res.render('index', { title: 'Home' });
+    res.render('locations-list', {
+        title: 'Loc8r - find a place to work with wiFi',
+        pageHeader: {
+            title: 'Loc8r',
+            strapline: 'Find places with wiFi near you!'
+        },
+        locations: [
+            {
+                name: 'Starcups',
+                address: '125 High Street, Reading, RG6 1PS',
+                reating: 3,
+                facilities: ['Hot drinks', 'Food', 'Premium wifi'],
+                distance: '100m'
+            },
+            {
+                name: 'Barnes',
+                address: '125 High Street, Reading, RG6 1PS',
+                reating: 3,
+                facilities: ['Hot drinks', 'Food', 'Premium wifi'],
+                distance: '200m'
+            },
+            {
+                name: 'Nandys',
+                address: '125 High Street, Reading, RG6 1PS',
+                reating: 2,
+                facilities: ['Hot drinks', 'Food', 'Premium wifi'],
+                distance: '250m'
+            },
+
+        ]
+    });
 };
 
 
 //get location info page
 exports.locationInfo = function (req, res) {
-    res.render('index', { title: 'Location Info' });
+    res.render('location-info', { title: 'Location Info' });
 };
 
 //get 'add review page'
 exports.addReview = function (req, res) {
-    res.render('index', { title: 'Add Review' });
+    res.render('location-review-form', { title: 'Add Review' });
 };

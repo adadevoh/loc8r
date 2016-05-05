@@ -4,18 +4,14 @@
  */
 
 
-//define controller modules
+//require and define controller modules
 var ctrlMain = require('../controllers/main');
 var ctrlLocations = require('../controllers/locations');
 var ctrlOthers = require('../controllers/others');
 
-module.exports = function (app) {
-    /*app.get('/', function (req, res) {
-        res.render('index', { title: 'Expressssss' });
-    });*/
+//wrap routes in a function, allowing it to use 'app' and and export it to app.js
 
-    //app.get('/', ctrlMain.index);
-    //app.get('/t', index);
+module.exports = function (app) {
 
     //Locations pages
     app.get('/', ctrlLocations.homelist);
@@ -24,6 +20,11 @@ module.exports = function (app) {
 
     //Other pages
     app.get('/about', ctrlOthers.about)
+
+    //Example
+    /*app.get('/', function (req, res) {
+        res.render('index', { title: 'Expressssss' });
+    });*/
 
 };
 
