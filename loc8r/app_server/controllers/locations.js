@@ -1,8 +1,5 @@
 ﻿
 
-
-
-
 //get locations home page
 //HomeList
 exports.homelist = function (req, res) {
@@ -16,7 +13,7 @@ exports.homelist = function (req, res) {
         locations: [
             {
                 name: 'Starcups',
-                address: '125 Low Street, Reading, RG6 1PS',
+                address: '125 High Street, Reading, RG6 1PS',
                 rating: 3,
                 facilities: ['Hot drinks', 'Food', 'Premium wifi'],
                 distance: '100m'
@@ -30,7 +27,7 @@ exports.homelist = function (req, res) {
             },
             {
                 name: 'Nandys',
-                address: '127 High Street, Reading, RG6 1PS',
+                address: '127 Low Street, Reading, RG6 1PS',
                 rating: 2,
                 facilities: ['Hot drinks', 'Food', 'Regular wifi'],
                 distance: '250m'
@@ -79,4 +76,12 @@ exports.locationInfo = function (req, res) {
 //Add review page
 exports.addReview = function (req, res) {
     res.render('location-review-form', { title: 'Add Review' });
+};
+
+
+
+
+//test
+exports.locationsListByDistance = function (req, res) {
+    console.log("locations by distance called");
 };

@@ -3,18 +3,21 @@
  * Module dependencies.
  */
 
-var express = require('express');
-var user = require('./app_server/routes/user');
+ var express = require('express');
+//var user = require('./app_server/routes/user');
 var http = require('http');
 var path = require('path');
 
 var app = express();
-
+require('./app_api/models/mongo/db');
 //load routes
-/*var routes = */require('./app_server/routes/index.js')(app);
+var routes = require('./app_server/routes/index.js')(app);
+var routesApi = require('./app_api/routes/index.js')(app);
 
 
-//with mutliple route files, look into turnig this into a loop, and loading them into a routes array
+
+
+//with mutliple route files, look into turning this into a loop, and loading them into a routes array
 //can also have routes/index.js as route landing page and use that to load all other routes in the routes directory
 //Example:
 /*
@@ -58,6 +61,11 @@ app.use(app.router);
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/', routes);
+
+// ********************************************* ADDED ROUTES API**********************************************
+//app.use('/api', routesApi);
+// ************************************************************************************************************
+
 
 // development only
 if ('development' == app.get('env')) {

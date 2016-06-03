@@ -26,6 +26,8 @@ module.exports = function (app) {
         res.render('index', { title: 'Expressssss' });
     });*/
 
+
+    app.get('/locations', ctrlLocations.locationsListByDistance);
 };
 
 var index = function (req, res) {

@@ -13,6 +13,8 @@
     "jade": "*",
     "mongodb": "^2.1.19",
     "mongoose": "^4.4.17",
+    "mysql": "^2.10.2",
+    "sequelize": "^3.23.2",
     "stylus": "*"
   }
 }
