@@ -1,4 +1,4 @@
-﻿
+﻿//app_server/routes/index.js
 /*
  * GET home page.
  */
@@ -27,7 +27,7 @@ module.exports = function (app) {
     });*/
 
 
-    app.get('/locations', ctrlLocations.locationsListByDistance);
+    //app.get('/locations', ctrlLocations.locationsListByDistance);
 };
 
 var index = function (req, res) {

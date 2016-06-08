@@ -3,18 +3,51 @@
  * Module dependencies.
  */
 
- var express = require('express');
-//var user = require('./app_server/routes/user');
+var express = require('express');
 var http = require('http');
 var path = require('path');
 
 var app = express();
+
+
+
+// all environment config settings
+app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'app_server/views'));
+app.set('view engine', 'jade');
+app.use(express.favicon());
+app.use(express.logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(express.methodOverride());
+app.use(app.router);
+app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.bodyParser());
+
+
+//add mongodb
 require('./app_api/models/mongo/db');
 //load routes
 var routes = require('./app_server/routes/index.js')(app);
 var routesApi = require('./app_api/routes/index.js')(app);
 
+//app.use('/', routes);
 
+// ********************************************* ADDED ROUTES API**********************************************
+//app.use('/api', routesApi);
+// ************************************************************************************************************
+
+
+// development only
+if ('development' == app.get('env')) {
+    app.use(express.errorHandler());
+}
+
+
+http.createServer(app).listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port'));
+});
 
 
 //with mutliple route files, look into turning this into a loop, and loading them into a routes array
@@ -47,40 +80,3 @@ routes/test1.js:
  *  require('./routes')(app);
  * 
  */
-
-// all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'app_server/views'));
-app.set('view engine', 'jade');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(app.router);
-app.use(require('stylus').middleware(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public')));
-//app.use('/', routes);
-
-// ********************************************* ADDED ROUTES API**********************************************
-//app.use('/api', routesApi);
-// ************************************************************************************************************
-
-
-// development only
-if ('development' == app.get('env')) {
-    app.use(express.errorHandler());
-}
-
-//app.get('/', routes.index);
-//app.get('/', routes.homePageController);
-//app.get('/home', routes.index.ctrlMain.index);
-//app.get('/users', user.list);
-
-//require('./app_server/routes/index')(app);
-
-http.createServer(app).listen(app.get('port'), function () {
-    console.log('Express server listening on port ' + app.get('port'));
-});
-
-

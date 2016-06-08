@@ -1,4 +1,4 @@
-﻿
+﻿//app_server/controllers/locations.js
 
 //get locations home page
 //HomeList
@@ -83,5 +83,7 @@ exports.addReview = function (req, res) {
 
 //test
 exports.locationsListByDistance = function (req, res) {
-    console.log("locations by distance called");
+    console.log("app_server/controller locations by distance called");
+    res.status(200)
+    res.json({ message: "app_server/controller: all good" });
 };
