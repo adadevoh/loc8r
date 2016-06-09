@@ -26,7 +26,6 @@ exports.reviewsCreate = function (req, res) {
                     sendJsonResponse(res, results.stat, results.message);
                 }
             }
-
         });
     }
     console.log("end of reviews create")
@@ -175,7 +174,7 @@ exports.reviewsReadOne = function (req, res) {
         });
     }
     console.log("end review read one");
-    sendJsonResponse(res, stat, message);
+    //sendJsonResponse(res, stat, message);
 }
 
 //original code from the book, same issue with null id occurs here, so problem is not with my code
@@ -238,16 +237,86 @@ exports.reviewsReadOne = function (req, res) {
 
 exports.reviewsUpdateOne = function (req, res) {
     console.log("reviews update one called");
+    if (!req.params.locationID || !req.params.reviewID) {
+        sendJsonResponse(res, 404, { message: "Not found, locationID and reviewID are both required" });
+        return;
+    }
+    Loc.findById(req.params.locationID).select('reviews').exec(function (err, location) {
+        var thisReview;
+        if (!location) {
+            sendJsonResponse(res, 404, { message: "locationID not found" });
+            return;
+        }
+        if (err) {
+            sendJsonResponse(res, 400, err);
+            return;
+        }
+        if (location.reviews && location.reviews.length > 0) {//if there is reviews subdic and if it does have reviews in it
+            thisReview = location.reviews.id(req.params.reviewID);
+            if (!thisReview) {
+                console.log("lodation._id: ", location._id);
+                sendJsonResponse(res, 404, { message: "reviewID not found" });
+            }
+            else {
+                thisReview.author = req.body.author;
+                thisReview.rating = req.body.rating;
+                thisReview.reviewText = req.body.reviewText;
+                location.save(function (err, location) {
+                    if (err)
+                        sendJsonResponse(res, 404, err);
+                    else {
+                        //console.log("lodation._id: ",location._id);
+                        updateAvgRating(location._id);
+                        sendJsonResponse(res, 200, thisReview);
+                    }
+                });
+            }
+
+        }
+        else
+            sendJsonResponse(res, 404, { message: "no review to update" });
+    });
     //console.log();
 
-    sendJsonResponse(res, 200, { "status": "success" })
+    //sendJsonResponse(res, 200, { "status": "success" })
 }
 
 exports.reviewsDeleteOne = function (req, res) {
     console.log("reviews delete one called");
-    //console.log();
-    sendJsonResponse(res, 200, { "status": "success" })
-}
+    if (!req.params.locationID || !req.params.reviewID) {
+        sendJsonResponse(res, 404, { message: "Not found, locationID nad reviewID needed" });
+        return;
+    }
+    Loc.findById(req.params.locationID).select('reviews').exec(function (err, location) {
+        if (!location) {
+            sendJsonResponse(res, 404, { message: "locationID not found" });
+            return;
+        }
+        else if (err) {
+            sendJsonResponse(res, 400, err);
+            return;
+        }
+        if (location.reviews && location.reviews.length > 0) {
+            if (!location.reviews.id(req.params.reviewID)) {
+                sendJsonResponse(res, 404, { message: "reviewID not found" });
+            }
+            else {
+                location.reviews.id(req.params.reviewID).remove();
+                location.save(function (err) {
+                    if (err) {
+                        sendJsonResponse(res, 404, err);
+                    }
+                    else {
+                        updateAvgRating(location._id);
+                        sendJsonResponse(res, 204, null);
+                    }
+                });
+            }
+        } else {
+            sendJsonResponse(res, 404, { message: "This location has no reviews" });
+        }
+    });
+};
 
 var sendJsonResponse = function (res, status, content){
     res.status(status)

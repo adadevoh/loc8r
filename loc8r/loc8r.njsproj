@@ -31,9 +31,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="app_api\controllers\locations.js" />
+    <Compile Include="app_api\controllers\reviews.js" />
+    <Compile Include="app_api\routes\index.js" />
     <Compile Include="app_server\controllers\locations.js" />
     <Compile Include="app_server\controllers\main.js" />
     <Compile Include="app_server\controllers\others.js" />
+    <Compile Include="app_api\models\mongo\db.js" />
+    <Compile Include="app_api\models\mongo\locations.js" />
     <Compile Include="app_server\routes\index.js" />
     <Compile Include="app_server\routes\user.js" />
     <Content Include="app_server\views\error.jade" />
@@ -41,6 +46,7 @@
     <Content Include="app_server\views\location-info.jade" />
     <Content Include="app_server\views\location-review-form.jade" />
     <Content Include="app_server\views\locations-list.jade" />
+    <Content Include="app_server\views\_include\sharedHTMLfunctions.jade" />
     <Content Include="package.json" />
     <Content Include="public\Bootstrap\css\amelia.bootstrap.css" />
     <Content Include="public\Bootstrap\css\amelia.bootstrap.min.css" />
@@ -50,8 +56,15 @@
     <Content Include="app_server\views\layout.jade" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app_api\controllers\" />
+    <Folder Include="app_api\routes\" />
     <Folder Include="app_server\" />
     <Folder Include="app_server\controllers\" />
+    <Folder Include="app_api\models\" />
+    <Folder Include="app_api\models\mongo\" />
+    <Folder Include="app_api\models\mysql\" />
+    <Folder Include="app_server\views\_include\" />
+    <Folder Include="app_api\" />
     <Folder Include="public\" />
     <Folder Include="public\Bootstrap\css\" />
     <Folder Include="public\Bootstrap\fonts\" />
