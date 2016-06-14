@@ -100,6 +100,7 @@ exports.locationsReadOne = function (req, res) {
     if (req.params && req.params.locationID) {//if params and params.locationID exist 
         Loc.findById(req.params.locationID).exec(function (err, location) {//execute query
             if (!location) {//if the locationID supplied does not exist
+                //console.log("no lcaotion exist");
                 sendJsonResponse(res, 404, { message: "that location does not exist" });
                 return;
                 //return can be redundant if you are already checking all possibilties of lcoation and err
@@ -109,6 +110,7 @@ exports.locationsReadOne = function (req, res) {
                 return;
             }
             //else//succesful query. location exists
+            //console.log("sending 200");
             sendJsonResponse(res, 200, location);
         });
     }

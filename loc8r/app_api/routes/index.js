@@ -4,15 +4,15 @@ var ctrlReviews = require('../controllers/reviews');
 
 module.exports = function (app) {
     //locations
-    app.get('/locations', ctrlLocations.locationsListByDistance);//done
-    app.post('/locations', ctrlLocations.locationsCreate);//done
-    app.get('/locations/:locationID', ctrlLocations.locationsReadOne);//done
-    app.put('/locations/:locationID', ctrlLocations.locationsUpdateOne);//done
-    app.delete('/locations/:locationID', ctrlLocations.locationsDeleteOne);//done
+    app.get('/api/locations', ctrlLocations.locationsListByDistance);//done
+    app.post('/api/locations', ctrlLocations.locationsCreate);//done
+    app.get('/api/locations/:locationID', ctrlLocations.locationsReadOne);//done
+    app.put('/api/locations/:locationID', ctrlLocations.locationsUpdateOne);//done
+    app.delete('/api/locations/:locationID', ctrlLocations.locationsDeleteOne);//done
 
     //reviews
-    app.post('/locations/:locationID/reviews', ctrlReviews.reviewsCreate);//done
-    app.get('/locations/:locationID/reviews/:reviewID', ctrlReviews.reviewsReadOne);//done
-    app.put('/locations/:locationID/reviews/:reviewID', ctrlReviews.reviewsUpdateOne);//done
-    app.delete('/locations/:locationID/reviews/:reviewID', ctrlReviews.reviewsDeleteOne);
+    app.post('/api/locations/:locationID/reviews', ctrlReviews.reviewsCreate);//done
+    app.get('/api/locations/:locationID/reviews/:reviewID', ctrlReviews.reviewsReadOne);//done
+    app.put('/api/locations/:locationID/reviews/:reviewID', ctrlReviews.reviewsUpdateOne);//done
+    app.delete('/api/locations/:locationID/reviews/:reviewID', ctrlReviews.reviewsDeleteOne);//done
 };

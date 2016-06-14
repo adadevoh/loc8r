@@ -115,10 +115,10 @@ exports.reviewsReadOne = function (req, res) {
         Loc.findById(req.params.locationID)
         .select("name reviews").exec(function (err, location) {
             var reviews, review, response;
-            console.log("location: ", location);
+            //console.log("location: ", location);
             reviews = location.reviews;//asing reviews so I can loop over it
             if (!location) {//location does not exist, throw 404 error
-                console.log("location not exist: " + req.params.locationID);
+                //console.log("location not exist: " + req.params.locationID);
                 stat = 404;
                 message = { "message": "that location does not exist" };
                 sendJsonResponse(res, stat, message);
@@ -128,16 +128,16 @@ exports.reviewsReadOne = function (req, res) {
                 if (location.reviews && location.reviews.length > 0) {//location has reviews
                     console.log("location has reviews: " + location.reviews.length);
                     //************************************************************************************ PROBELM HERE ***********************************************************************************************
-                    //somehow mongoose keeps returning null for location.reviews.id
+                    //somehow mongoose keeps returning null for location.reviews.id == > fixed
                     review = location.reviews.id(req.params.reviewID)//mongoose subdoc helper to search for review with id => req.params.reviewID
                     console.log("req.params.reviewID: ", req.params.reviewID)
-                    console.log("location.reviews.id('574dc468f7b65ceb96665a7e'): ", location.reviews.id("574dc468f7b65ceb96665a7e"));
+                    //console.log("location.reviews.id('574dc468f7b65ceb96665a7e'): ", location.reviews.id("574dc468f7b65ceb96665a7e"));
                     console.log("review: ", review);
-                    console.log("loc reviews: ", location.reviews[0]);
-                    console.log("after review assign, location.reviews.id: ", location.name);
-                    for (var i = 0; i < reviews.length; i++) {
-                        console.log("id: ", reviews[i].createdoN);
-                    }
+                    //console.log("loc reviews: ", location.reviews[0]);
+                    //console.log("after review assign, location.reviews.id: ", location.name);
+                    //for (var i = 0; i < reviews.length; i++) {
+                    //    console.log("id: ", reviews[i].createdoN);
+                    //}
                     
 
                     if (review) {//if location exists, has reviews, and particular review/reviewID exists

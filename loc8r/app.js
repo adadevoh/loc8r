@@ -8,7 +8,10 @@ var http = require('http');
 var path = require('path');
 
 var app = express();
-
+// development only
+if ('development' == app.get('env')) {
+    app.use(express.errorHandler());
+}
 
 
 // all environment config settings
@@ -29,7 +32,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 //add mongodb
 require('./app_api/models/mongo/db');
 //load routes
-var routes = require('./app_server/routes/index.js')(app);
+var routes = require('./app_server/routes/index')(app);
+//app.use('/', routes);
 var routesApi = require('./app_api/routes/index.js')(app);
 
 //app.use('/', routes);
@@ -39,13 +43,10 @@ var routesApi = require('./app_api/routes/index.js')(app);
 // ************************************************************************************************************
 
 
-// development only
-if ('development' == app.get('env')) {
-    app.use(express.errorHandler());
-}
 
+console.log("port: ", app.get('port'));
 
-http.createServer(app).listen(app.get('port'), function () {
+http.createServer(app).listen(3000, function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
 
