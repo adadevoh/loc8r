@@ -18,7 +18,8 @@ block content
                             h2.panel-title Opening Times
                         .panel-body
                             each hour in location.openingTimes
-                                p #{hour.days} : #{hour.opening} - #{hour.closing} 
+                                unless hour.closed
+                                    p #{hour.days} : #{hour.opening} - #{hour.closing} 
                                 if hour.closed
                                     p #{hour.days} :  closed
 

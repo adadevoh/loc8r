@@ -38,13 +38,16 @@ var addReview = function (req, res, location) {
         stat : 404
     };
     if (location) {
-        results = {
+        results = {//this results block is redundant
             err: false,
             message : { "message": "locationID found" },
             stat : 200
         };
+        console.log("req.body.author:", req.body.author);
+        console.log("req.body.rating: ",req.body.rating);
+        console.log("req.body.reviewText: ", req.body.reviewText);
         location.reviews.push({
-            author: req.body.author,
+            author: /*"james brown"*/req.body.author,
             rating: req.body.rating,
             reviewText: req.body.reviewText
         }); //console.log("before save");
@@ -53,7 +56,8 @@ var addReview = function (req, res, location) {
             var thisReview;
             //console.log("inside save");
             if (err) {
-                results.err = err;
+                console.log("err: ", err);
+                results.err = results.message = err;
                 results.stat = 400;
                 results.res = res;
                 //sendJsonResponse(res, results.stat, results.err);

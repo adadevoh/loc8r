@@ -20,7 +20,7 @@ exports.homelist = function (req, res) {
         qs: {
             lng: -0.9630884,
             lat: 51.451041,
-            maxDistance: 20.0,
+            maxDistance: 30.0,
         }
 
     };
@@ -117,7 +117,10 @@ exports.addReview = function (req, res) {//display add review form
 var renderReviewForm = function(req, res, locDetail){
     res.render('location-review-form', { 
         title: 'Review '+locDetail.name+" on Loc8r",
-        pageHeader: {title: 'Review'+locDetail.name}
+        pageHeader: {title: 'Review'+locDetail.name},
+        error: req.query.err,
+        newText: "james blonde",
+        txt: "author"//a test, to see that I can input html element attributes via server side rendering
     });
 };
 
@@ -138,13 +141,22 @@ exports.doAddReview = function(req, res){
         method: "POST",
         json: postdata
     };
-    request(requestOptions, function(err, response, body){
-        if(response.statusCode=== 201){
-            res.redirect('/location/'+locationID);
-        }else{
-            _showError(req, res, response.statusCode);
-        }
-    })
+    console.log("postdata: ",postdata)
+    if (!postdata.author || !postdata.rating || !postdata.reviewText) {
+        res.redirect('/location/'+locationID +'/review/new?err=val');
+    }
+    else{
+        request(requestOptions, function(err, response, body){
+            if(response.statusCode=== 201){
+                res.redirect('/location/'+locationID);
+            }else if (response.statusCode === 400 && body.name && body.name === "ValidationError") {
+                res.redirect('/location/'+locationID+"/review/new?err=val")
+            }
+            else{
+                _showError(req, res, response.statusCode);
+            }
+        });
+    }
 };
 
 
@@ -155,7 +167,7 @@ var getLocationInfo = function(req, res, callback){
     path = "/api/locations/"+req.params.locationID;
     requestOptions = {
         url : apiOptions.server +path,
-        mthod : "GET",
+        method : "GET",
         json : {}
     };
     request(requestOptions, function(err, response, body){

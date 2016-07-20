@@ -58,6 +58,16 @@ exports.locationsCreate = function (req, res) {
     console.log("locatons create called");
 
     //console.log("name: ", req.body.name);
+    console.log("days1: ",req.body.days1);
+    console.log("opening1: ",req.body.opening1);
+    console.log("closing1: ", req.body.closing1);
+    console.log("closed1: ", req.body.closed1);
+    console.log(req.body.days2);
+    console.log(req.body.opening2);
+    console.log(req.body.closing2);
+    console.log(req.body.closed2);
+    console.log();
+    console.log();
 
     Loc.create({
         name: req.body.name,
@@ -164,7 +174,7 @@ exports.locationsUpdateOne = function (req, res){
             }
         });
     });
-    //
+    //find and update example
     /*Loc.findByIdAndUpdate(req.params.locationID, { $set : { name: "Cuckoo" } }, function (err, location) {
         if (!location) {
             sendJsonResponse(res, 404, { message: "locationID not found" });
