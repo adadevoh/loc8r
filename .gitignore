@@ -9,6 +9,8 @@
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
+typings/
+loc8r.njsproj
 
 # Build results
 [Dd]ebug/
@@ -210,3 +212,5 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+loc8r/loc8r.njsproj
+*.njsproj
